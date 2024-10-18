@@ -2,14 +2,15 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import SignUP from './components/SignUp'
 
 function App() {
   return (
     <>
 
-<h1 className="text-8xl font-bold underline">
-      Hey let's start begin the project!!
-    </h1>
+<div className="App">
+      <SignUP/>
+    </div>
     </>
   )
 }
