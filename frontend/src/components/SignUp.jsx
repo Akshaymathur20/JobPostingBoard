@@ -25,16 +25,6 @@ const CompanyRegistration = () => {
 
   return (
     <div className="flex h-screen">
-      {/* Left Side Text */}
-      <div className="w-[600px] h-[600px] gap-0 opacity-100 absolute" style={{ top: '490px', left: '100px' }}>
-        <h1 className="text-4xl font-bold mb-4">Welcome to Our Platform!</h1>
-        <p className="text-lg text-gray-700 mb-8">
-          We provide top-notch services for companies to find the best talent. Join us today to post jobs and connect with skilled professionals.
-        </p>
-        <p className="text-md text-gray-600">
-          Our platform is built to ensure seamless recruitment processes, enabling companies to verify, post jobs, and review candidates efficiently.
-        </p>
-      </div>
 
       {/* Right Side Registration Form */}
       <div
