@@ -1,22 +1,31 @@
 import React, { useState } from "react";
 
 function VerificationForm() {
-  const [otp, setOtp] = useState("");
+  const [emailOtp, setEmailOtp] = useState("");
+  const [phoneOtp, setPhoneOtp] = useState("");
   const [emailVerified, setEmailVerified] = useState(false);
   const [phoneVerified, setPhoneVerified] = useState(false);
 
-  const handleOtpChange = (e) => {
-    setOtp(e.target.value);
+  const handleEmailOtpChange = (e) => {
+    setEmailOtp(e.target.value);
+  };
+
+  const handlePhoneOtpChange = (e) => {
+    setPhoneOtp(e.target.value);
   };
 
   const handleVerify = (e) => {
     e.preventDefault();
-    //  (API call)
-    console.log("Verifying OTP:", otp);
-    
+    // Here you would handle the API call to verify the OTPs
+    console.log("Verifying Email OTP:", emailOtp);
+    console.log("Verifying Phone OTP:", phoneOtp);
+
+    // For demo purposes, we assume both are valid
     setEmailVerified(true);
     setPhoneVerified(true);
   };
+
+
 
   return (
     <div className="flex h-screen">
@@ -39,10 +48,13 @@ function VerificationForm() {
                   className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  bg-gray-200 text-2xl"
                   type="text"
                     placeholder="✉️  Email OTP"
-                  value={otp}
-                   onChange={handleOtpChange}
+                  value={emailOtp}
+                   onChange={handleEmailOtpChange}
                 />
               </div>
+              {emailVerified && (
+                <p className="text-green-600 mt-2">Email Verified ✅</p>
+              )}
             </div>
         
             <button
@@ -60,10 +72,13 @@ function VerificationForm() {
                   className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  bg-gray-200 text-2xl"
                   type="text"
                     placeholder="📞  Mobile OTP"
-                  value={otp}
-                   onChange={handleOtpChange}
+                  value={phoneOtp}
+                   onChange={handlePhoneOtpChange}
                 />
               </div>
+              {phoneVerified && (
+                <p className="text-green-600 mt-2">Phone Verified ✅</p>
+              )}
             </div>
       <button
         type="submit"

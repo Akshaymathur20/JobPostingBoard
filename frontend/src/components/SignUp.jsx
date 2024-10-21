@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import API from '../services/api';
 
 const CompanyRegistration = () => {
-  const [form, setForm] = useState({
+  const [formData, setFormData] = useState({
     name: '',
     phone: '',
     companyName: '',
@@ -9,18 +10,22 @@ const CompanyRegistration = () => {
     employeeSize: '',
   });
 
+  const [message, setMessage] = useState('');
+
+  const { name, phone, companyName, companyEmail, employeeSize } = formData;
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Implement registration logic with email and mobile verification
-    console.log(form);
+    try {
+      const res = await API.post('/auth/register', formData);
+      setMessage(res.data.msg);
+    } catch (error) {
+      setMessage('Registration failed',error);
+    }
   };
 
   return (
@@ -45,7 +50,7 @@ const CompanyRegistration = () => {
                   name="name"
                   type="text"
                   placeholder="👤  Name"
-                  value={form.name}
+                  value={name}
                   onChange={handleChange}
                 />
               </div>
@@ -58,7 +63,7 @@ const CompanyRegistration = () => {
                   name="phone"
                   type="text"
                   placeholder="📞  Phone no."
-                  value={form.phone}
+                  value={phone}
                   onChange={handleChange}
                 />
               </div>
@@ -71,7 +76,7 @@ const CompanyRegistration = () => {
                   name="companyName"
                   type="text"
                   placeholder=" 👤 Company Name"
-                  value={form.companyName}
+                  value={companyName}
                   onChange={handleChange}
                 />
               </div>
@@ -84,7 +89,7 @@ const CompanyRegistration = () => {
                   name="companyEmail"
                   type="email"
                   placeholder="✉️  Company Email"
-                  value={form.companyEmail}
+                  value={companyEmail}
                   onChange={handleChange}
                 />
               </div>
@@ -97,7 +102,7 @@ const CompanyRegistration = () => {
                   name="employeeSize"
                   type="text"
                   placeholder="👥  Employee size"
-                  value={form.employeeSize}
+                  value={employeeSize}
                   onChange={handleChange}
                 />
               </div>
@@ -116,6 +121,7 @@ const CompanyRegistration = () => {
               </button>
             </div>
           </form>
+          {message && <p className="mt-4 text-red-500">{message}</p>}
         </div>
       </div>
     </div>
